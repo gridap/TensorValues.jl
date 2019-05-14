@@ -29,5 +29,5 @@ C = inner.(g,B) # inner product of g against all TensorValues in the array B
 
 ## Installation
 ```julia
-Pkg.add("TensorValues)
+Pkg.add("TensorValues")
 ```
