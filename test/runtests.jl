@@ -11,4 +11,8 @@ end
   include("OperationsTests.jl")
 end
 
+@testset "IndexingTests" begin
+  include("IndexingTests.jl")
+end
+
 end # module TensorValuesTests
