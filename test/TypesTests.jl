@@ -4,28 +4,28 @@ using TensorValues
 using Test
 using StaticArrays
 
-# Constructors (NDimValue)
+# Constructors (MultiValue)
 
 a = SArray{Tuple{3,2}}((1,2,3,4,5,6))
 
-v = NDimValue(a)
-@test isa(v,NDimValue{Tuple{3,2},Int})
+v = MultiValue(a)
+@test isa(v,MultiValue{Tuple{3,2},Int})
 @test v.array === a
 
-v = NDimValue{Tuple{3,2}}((1,2,3,4,5,6))
-@test isa(v,NDimValue{Tuple{3,2},Int})
+v = MultiValue{Tuple{3,2}}((1,2,3,4,5,6))
+@test isa(v,MultiValue{Tuple{3,2},Int})
 @test v.array == a
 
-v = NDimValue{Tuple{3,2}}(1,2,3,4,5,6)
-@test isa(v,NDimValue{Tuple{3,2},Int})
+v = MultiValue{Tuple{3,2}}(1,2,3,4,5,6)
+@test isa(v,MultiValue{Tuple{3,2},Int})
 @test v.array == a
 
-v = NDimValue{Tuple{3,2},Float64}((1,2,3,4,5,6))
-@test isa(v,NDimValue{Tuple{3,2},Float64})
+v = MultiValue{Tuple{3,2},Float64}((1,2,3,4,5,6))
+@test isa(v,MultiValue{Tuple{3,2},Float64})
 @test v.array == a
 
-v = NDimValue{Tuple{3,2},Float64}(1,2,3,4,5,6)
-@test isa(v,NDimValue{Tuple{3,2},Float64})
+v = MultiValue{Tuple{3,2},Float64}(1,2,3,4,5,6)
+@test isa(v,MultiValue{Tuple{3,2},Float64})
 @test v.array == a
 
 # Constructors (TensorValue)
@@ -74,7 +74,7 @@ g = VectorValue(1,2,3,4)
 
 # Custom type printing
 
-s = "NDimValue{Tuple{3,2},Float64}([1.0 4.0; 2.0 5.0; 3.0 6.0])"
+s = "MultiValue{Tuple{3,2},Float64}([1.0 4.0; 2.0 5.0; 3.0 6.0])"
 @test string(v) == s
 
 s = "TensorValue{2,Int64}([1 3; 2 4])"

@@ -4,50 +4,50 @@
 """
 Type representing a multi-dimensional value
 """
-struct NDimValue{S,T,N,L}
+struct MultiValue{S,T,N,L}
   array::SArray{S,T,N,L}
 end
 
 """
 Type representing a second-order tensor
 """
-const TensorValue{D,T,L} = NDimValue{Tuple{D,D},T,2,L}
+const TensorValue{D,T,L} = MultiValue{Tuple{D,D},T,2,L}
 
 """
 Type representing a first-order tensor
 """
-const VectorValue{D,T} = NDimValue{Tuple{D},T,1,D}
+const VectorValue{D,T} = MultiValue{Tuple{D},T,1,D}
 
-# Constructors (NDimValue)
+# Constructors (MultiValue)
 
-function (::Type{NDimValue{S}})(x::Tuple) where S<:Tuple
+function (::Type{MultiValue{S}})(x::Tuple) where S<:Tuple
   array = SArray{S}(x)
-  NDimValue(array)
+  MultiValue(array)
 end
 
-function (::Type{NDimValue{S,T}})(x::Tuple) where {S<:Tuple,T}
+function (::Type{MultiValue{S,T}})(x::Tuple) where {S<:Tuple,T}
   array = SArray{S,T}(x)
-  NDimValue(array)
+  MultiValue(array)
 end
 
-function (::Type{NDimValue{S}})(x::Vararg) where S<:Tuple
-  NDimValue{S}(x)
+function (::Type{MultiValue{S}})(x::Vararg) where S<:Tuple
+  MultiValue{S}(x)
 end
 
-function (::Type{NDimValue{S,T}})(x::Vararg) where {S<:Tuple,T}
-  NDimValue{S,T}(x)
+function (::Type{MultiValue{S,T}})(x::Vararg) where {S<:Tuple,T}
+  MultiValue{S,T}(x)
 end
 
 # Constructors (TensorValue)
 
 function (::Type{TensorValue{D}})(x::Tuple) where D
   S = Tuple{D,D}
-  NDimValue{S}(x)
+  MultiValue{S}(x)
 end
 
 function (::Type{TensorValue{D,T}})(x::Tuple) where {D,T}
   S = Tuple{D,D}
-  NDimValue{S,T}(x)
+  MultiValue{S,T}(x)
 end
 
 function (::Type{TensorValue{D}})(x::Vararg) where D
@@ -69,12 +69,12 @@ end
 
 function (::Type{VectorValue{D}})(x::Tuple) where D
   S = Tuple{D}
-  NDimValue{S}(x)
+  MultiValue{S}(x)
 end
 
 function (::Type{VectorValue{D,T}})(x::Tuple) where {D,T}
   S = Tuple{D}
-  NDimValue{S,T}(x)
+  MultiValue{S,T}(x)
 end
 
 function (::Type{VectorValue{D}})(x::Vararg{Any,D}) where D
@@ -91,8 +91,8 @@ end
 
 # Custom type printing
 
-function show(io::IO,::Type{<:NDimValue{S,T}}) where {S,T}
-  print(io,"NDimValue{$S,$T}")
+function show(io::IO,::Type{<:MultiValue{S,T}}) where {S,T}
+  print(io,"MultiValue{$S,$T}")
 end
 
 function show(io::IO,::Type{<:TensorValue{D,T}}) where {D,T}

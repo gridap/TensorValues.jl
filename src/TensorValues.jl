@@ -2,7 +2,7 @@ module TensorValues
 
 using StaticArrays
 
-export NDimValue
+export MultiValue
 export TensorValue
 export VectorValue
 import Base: show
