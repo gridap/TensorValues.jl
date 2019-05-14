@@ -4,7 +4,7 @@
 """
 Type representing a multi-dimensional value
 """
-struct MultiValue{S,T,N,L}
+struct MultiValue{S,T,N,L} <: Number
   array::SArray{S,T,N,L}
 end
 
