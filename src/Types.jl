@@ -89,14 +89,22 @@ function VectorValue(args::Vararg{T,D}) where {T,D}
   VectorValue{D,T}(args)
 end
 
-# Custom type printing
+# Initializers
 
-function show(io::IO,::Type{<:MultiValue{S,T}}) where {S,T}
-  print(io,"MultiValue{$S,$T}")
+function zero(::Type{<:MultiValue{S,T,N,L}}) where {S,T,N,L}
+  z = zero(SArray{S,T,N,L})
+  MultiValue{S,T,N,L}(z)
 end
 
-function show(io::IO,::Type{<:TensorValue{D,T}}) where {D,T}
-  print(io,"TensorValue{$D,$T}")
+function one(::Type{<:MultiValue{S,T,N,L}}) where {S,T,N,L}
+  z = one(SArray{S,T,N,L})
+  MultiValue{S,T,N,L}(z)
+end
+
+# Custom type printing
+
+function show(io::IO,::Type{<:TensorValue{D,T,L}}) where {D,T,L}
+  print(io,"TensorValue{$D,$T,$L}")
 end
 
 function show(io::IO,::Type{<:VectorValue{D,T}}) where {D,T}
