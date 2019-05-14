@@ -92,7 +92,7 @@ z = one(TensorValue{3,Int,9})
 
 # Custom type printing
 
-s = "MultiValue{Tuple{3,2},Float64,2,6}(1.0, 2.0, 3.0, 4.0, 5.0, 6.0)"
+s = "TensorValues.MultiValue{Tuple{3,2},Float64,2,6}(1.0, 2.0, 3.0, 4.0, 5.0, 6.0)"
 @test string(v) == s
 
 s = "TensorValue{2,Int64,4}(1, 2, 3, 4)"
