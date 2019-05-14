@@ -103,3 +103,8 @@ function show(io::IO,::Type{<:VectorValue{D,T}}) where {D,T}
   print(io,"VectorValue{$D,$T}")
 end
 
+function show(io::IO,v::MultiValue)
+  print(io,typeof(v))
+  print(io,v.array.data)
+end
+
