@@ -30,4 +30,8 @@ end
 
 @test t[2] == 4
 
+for (k,ti) in enumerate(t)
+  @test ti == a[k]
+end
+
 end # module IndexingTests
