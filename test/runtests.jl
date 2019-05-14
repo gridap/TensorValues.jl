@@ -1,6 +1,6 @@
 using TensorValues
 using Test
 
-@testset "NDimValuesTests" begin
-  include("NDimValuesTests.jl")
+@testset "TypesTests" begin
+  include("TypesTests.jl")
 end
