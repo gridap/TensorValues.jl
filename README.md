@@ -9,9 +9,9 @@ If you ❤️ this project, give us a ⭐️!
 
 ## Why
 
-The main feature of the **TensorValues** package is that the provided types `VectorValue`, `TensorValue`, and `MultiValue` do not extend from `AbstractArray`, but from `Number`!
+The main feature of the **TensorValues** package is that the provided do not extend from `AbstractArray`, but from `Number`!
 
-This allows one to work with them as if they were scalar values, which is specially useful, when using broadcasted operations on arrays of `VectorValue` or `TensorValue` objects. For instance, one can perform the following manipulations:
+This allows one to work with them as if they were scalar values in broadcasted operations on arrays of `VectorValue` objects (also for `TensorValue` or `MultiValue` objects). For instance, one can perform the following manipulations:
 ```julia
 # Assing a VectorValue to all the entries of an Array of VectorValues
 A = zeros(VectorValue{2,Int}, (4,5))
