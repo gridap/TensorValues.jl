@@ -38,6 +38,10 @@ function (::Type{MultiValue{S,T}})(x::Vararg) where {S<:Tuple,T}
   MultiValue{S,T}(x)
 end
 
+function MultiValue(a::StaticArray{S,T}) where {S,T}
+  MultiValue{S,T}(a.data)
+end
+
 # Constructors (TensorValue)
 
 function (::Type{TensorValue{D}})(x::Tuple) where D
@@ -69,6 +73,10 @@ function TensorValue(args::Vararg)
   TensorValue(args)
 end
 
+function TensorValue(a::StaticArray)
+  TensorValue(a.data)
+end
+
 # Constructors (VectorValue)
 
 function (::Type{VectorValue{D}})(x::Tuple) where D
@@ -95,6 +103,10 @@ end
 
 function VectorValue(args::Vararg)
   VectorValue(args)
+end
+
+function VectorValue(a::StaticArray)
+  VectorValue(a.data)
 end
 
 # Initializers
