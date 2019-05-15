@@ -58,11 +58,15 @@ function (::Type{TensorValue{D,T}})(x::Vararg) where {D,T}
   TensorValue{D,T}(x)
 end
 
-@generated function TensorValue(args::Vararg{T,DD}) where {T,DD}
+@generated function TensorValue(arg::NTuple{DD,T}) where {T,DD}
   SQ = sqrt(DD)
   D = ceil(Int,SQ)
   @assert D == SQ
-  :( TensorValue{$D,T}(args...)  )
+  :( TensorValue{$D,T}(arg)  )
+end
+
+function TensorValue(args::Vararg)
+  TensorValue(args)
 end
 
 # Constructors (VectorValue)
@@ -85,8 +89,12 @@ function (::Type{VectorValue{D,T}})(x::Vararg{Any,D}) where {D,T}
   VectorValue{D,T}(x)
 end
 
-function VectorValue(args::Vararg{T,D}) where {T,D}
-  VectorValue{D,T}(args)
+function VectorValue(arg::NTuple{D,T}) where {D,T}
+  VectorValue{D,T}(arg)
+end
+
+function VectorValue(args::Vararg)
+  VectorValue(args)
 end
 
 # Initializers
@@ -102,14 +110,6 @@ function one(::Type{<:MultiValue{S,T,N,L}}) where {S,T,N,L}
 end
 
 # Custom type printing
-
-function show(io::IO,::Type{<:TensorValue{D,T,L}}) where {D,T,L}
-  print(io,"TensorValue{$D,$T,$L}")
-end
-
-function show(io::IO,::Type{<:VectorValue{D,T}}) where {D,T}
-  print(io,"VectorValue{$D,$T}")
-end
 
 function show(io::IO,v::MultiValue)
   print(io,typeof(v))
