@@ -15,4 +15,8 @@ end
   include("IndexingTests.jl")
 end
 
+@testset "ReinterpretTests" begin
+  include("ReinterpretTests.jl")
+end
+
 end # module TensorValuesTests

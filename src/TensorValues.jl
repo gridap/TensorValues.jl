@@ -15,6 +15,7 @@ import Base: zero, one
 import Base: +, -, *, /, \, ==, ≈
 import Base: getindex, iterate, eachindex
 import Base: size, length, eltype
+import Base: reinterpret
 
 import LinearAlgebra: det, inv
 
@@ -23,5 +24,7 @@ include("Types.jl")
 include("Indexing.jl")
 
 include("Operations.jl")
+
+include("Reinterpret.jl")
 
 end # module
