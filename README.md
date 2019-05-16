@@ -1,7 +1,7 @@
 # TensorValues
 
-[![Build Status](https://travis-ci.com/lssc-team/TensorValues.jl.svg?branch=master)](https://travis-ci.com/lssc-team/TensorValues.jl)
-[![Codecov](https://codecov.io/gh/lssc-team/TensorValues.jl/branch/master/graph/badge.svg)](https://codecov.io/gh/lssc-team/TensorValues.jl)
+[![Build Status](https://travis-ci.com/gridap/TensorValues.jl.svg?branch=master)](https://travis-ci.com/gridap/TensorValues.jl)
+[![Codecov](https://codecov.io/gh/gridap/TensorValues.jl/branch/master/graph/badge.svg)](https://codecov.io/gh/gridap/TensorValues.jl)
 
 If you ❤️ this project, give us a ⭐️!
 
