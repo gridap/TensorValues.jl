@@ -16,6 +16,9 @@ import Base: +, -, *, /, \, ==, ≈
 import Base: getindex, iterate, eachindex
 import Base: size, length, eltype
 import Base: reinterpret
+import Base: convert
+import Base: CartesianIndices
+import Base: LinearIndices
 
 import LinearAlgebra: det, inv
 

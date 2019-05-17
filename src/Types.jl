@@ -121,6 +121,12 @@ function one(::Type{<:MultiValue{S,T,N,L}}) where {S,T,N,L}
   MultiValue{S,T,N,L}(z)
 end
 
+# Conversions
+
+function convert(::Type{<:MultiValue{S,T,N}},a::StaticArray{S,T,N}) where {S,T,N}
+  MultiValue(a)
+end
+
 # Custom type printing
 
 function show(io::IO,v::MultiValue)

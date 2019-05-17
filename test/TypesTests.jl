@@ -123,6 +123,12 @@ z = one(TensorValue{3,Int,9})
 @test isa(z,TensorValue{3,Int,9})
 @test z.array == [1 0 0; 0 1 0; 0 0 1]
 
+# Conversions
+
+a = @SVector ones(Int,3)
+b = convert(VectorValue{3,Int},a)
+@test isa(b,VectorValue{3,Int})
+
 # Custom type printing
 
 s = "TensorValues.MultiValue{Tuple{3,2},Float64,2,6}(1.0, 2.0, 3.0, 4.0, 5.0, 6.0)"

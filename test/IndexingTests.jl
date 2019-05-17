@@ -2,6 +2,7 @@ module IndexingTests
 
 using Test
 using TensorValues
+using StaticArrays
 
 a = (3,4,5,1)
 
@@ -33,5 +34,10 @@ end
 for (k,ti) in enumerate(t)
   @test ti == a[k]
 end
+
+v = @SMatrix zeros(2,3)
+w = MultiValue(v)
+@test CartesianIndices(w) == CartesianIndices(v)
+@test LinearIndices(w) == LinearIndices(v)
 
 end # module IndexingTests

@@ -14,8 +14,16 @@ end
 
 eltype(a::Type{MultiValue{S,T,N,L}}) where {S,T,N,L} = T
 
-iterate(a::MultiValue) = iterate(a.array)
+@inline iterate(a::MultiValue) = iterate(a.array)
 
-iterate(a::MultiValue, state) = iterate(a.array, state)
+@inline iterate(a::MultiValue, state) = iterate(a.array, state)
 
 eachindex(a::MultiValue) = eachindex(a.array)
+
+function CartesianIndices(a::MultiValue)
+  CartesianIndices(a.array)
+end
+
+function LinearIndices(a::MultiValue)
+  LinearIndices(a.array)
+end
