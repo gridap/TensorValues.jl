@@ -137,6 +137,11 @@ end
 
 length(::Type{MultiValue{S,T,N,L}}) where {S,T,N,L} = L
 
+function size(::Type{MultiValue{S,T,N,L}}) where {S,T,N,L}
+  A = SArray{S,T,N,L}
+  size(A)
+end
+
 # Custom type printing
 
 function show(io::IO,v::MultiValue)

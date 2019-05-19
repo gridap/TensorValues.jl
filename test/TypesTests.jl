@@ -133,6 +133,12 @@ a = ones(Int,3)
 b = convert(VectorValue{3,Int},a)
 @test isa(b,VectorValue{3,Int})
 
+# Misc operations on the type itself
+
+V = VectorValue{3,Int}
+@test length(V) == 3
+@test size(V) == (3,)
+
 # Custom type printing
 
 s = "TensorValues.MultiValue{Tuple{3,2},Float64,2,6}(1.0, 2.0, 3.0, 4.0, 5.0, 6.0)"
