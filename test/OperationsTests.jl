@@ -11,6 +11,8 @@ b = VectorValue(2,1,6)
 @test a==a
 @test a ≈ a
 @test a!=b
+@test [a,a] == [a,a]
+@test [a,a] ≈ [a,a]
 
 # Addition / subtraction
 

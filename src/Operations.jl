@@ -9,6 +9,15 @@ function (≈)(a::MultiValue,b::MultiValue)
   a.array ≈ b.array
 end
 
+function (≈)(
+  a::AbstractArray{<:MultiValue}, b::AbstractArray{<:MultiValue})
+  if size(a) != size(b); return false; end
+  for (ai,bi) in zip(a,b)
+    if !(ai≈bi); return false; end
+  end
+  true
+end
+
 # Addition / subtraction
 
 for op in (:+,:-)

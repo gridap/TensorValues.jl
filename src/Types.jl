@@ -123,9 +123,19 @@ end
 
 # Conversions
 
-function convert(::Type{<:MultiValue{S,T,N}},a::StaticArray{S,T,N}) where {S,T,N}
+function convert(::Type{<:MultiValue{S,T,N,L}},a::StaticArray{S,T,N}) where {S,T,N,L}
   MultiValue(a)
 end
+
+function convert(
+  ::Type{<:MultiValue{S,T,N,L}},a::AbstractArray{T,N}) where {S,T,N,L}
+  b = convert(SArray{S,T,N,L},a)
+  MultiValue(b)
+end
+
+# Misc operations on the type itself
+
+length(::Type{MultiValue{S,T,N,L}}) where {S,T,N,L} = L
 
 # Custom type printing
 
