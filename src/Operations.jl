@@ -43,17 +43,16 @@ function (\)(a::TensorValue, b::MultiValue)
   MultiValue(r)
 end
 
-# Scaling by a scalar
+# Operations with other numbers
 
-function (*)(a::MultiValue,b::Real)
-  r = a.array * b
-  MultiValue(r)
+for op in (:+,:-,:*)
+  @eval begin
+    ($op)(a::MultiValue,b::Number) = MultiValue($op(a.array,b))
+    ($op)(a::Number,b::MultiValue) = MultiValue($op(a,b.array))
+  end
 end
 
-function (*)(a::Real,b::MultiValue)
-  r = a * b.array
-  MultiValue(r)
-end
+(/)(a::MultiValue,b::Number) = MultiValue(a.array/b)
 
 # Dot product (simple contraction)
 
@@ -71,6 +70,14 @@ inner(a::Real,b::Real) = a*b
 @generated function inner(a::MultiValue{S,T,N,L}, b::MultiValue{S,W,N,L}) where {S,T,N,L,W}
   str = join([" a.array.data[$i]*b.array.data[$i] +" for i in 1:L ])
   Meta.parse(str[1:(end-1)])
+end
+
+# Reductions
+
+for op in (:sum,:maximum,:minimum)
+  @eval begin
+    $op(a::MultiValue) = $op(a.array)
+  end
 end
 
 # Outer product (aka dyadic product)

@@ -40,7 +40,7 @@ c = t\a
 
 @test c == a
 
-# Scaling by a scalar
+# Operations by a scalar
 
 a = VectorValue(1,2,3)
 r = VectorValue(2,4,6)
@@ -51,6 +51,22 @@ c = 2 * a
 
 c = a * 2
 @test isa(c,VectorValue{3,Int})
+@test c == r
+
+r = VectorValue(3,4,5)
+
+c = 2 + a
+@test isa(c,VectorValue{3,Int})
+@test c == r
+
+c = a + 2
+@test isa(c,VectorValue{3,Int})
+@test c == r
+
+r = VectorValue(1/2,1.0,3/2)
+
+c = a / 2
+@test isa(c,VectorValue{3,Float64})
 @test c == r
 
 # Dot product (simple contraction)
@@ -87,6 +103,22 @@ c = inner(a,b)
 c = inner(t,s)
 @test isa(c,Int)
 @test c == 185
+
+# Reductions
+
+a = VectorValue(1,2,3)
+
+c = sum(a)
+@test isa(c,Int)
+@test c == 1+2+3
+
+c = maximum(a)
+@test isa(c,Int)
+@test c == 3
+
+c = minimum(a)
+@test isa(c,Int)
+@test c == 1
 
 # Outer product (aka dyadic product)
 
