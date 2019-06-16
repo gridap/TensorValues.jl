@@ -110,6 +110,8 @@ g = VectorValue((1,2,3,4))
 z = zero(MultiValue{Tuple{3,2},Int,2,6})
 @test isa(z,MultiValue{Tuple{3,2},Int,2,6})
 @test z.array == zeros(Int,(3,2))
+s = zero(z)
+@test s.array == zeros(Int,(3,2))
 
 z = zero(TensorValue{3,Int,9})
 @test isa(z,TensorValue{3,Int,9})
@@ -122,6 +124,8 @@ z = zero(VectorValue{3,Int})
 z = one(TensorValue{3,Int,9})
 @test isa(z,TensorValue{3,Int,9})
 @test z.array == [1 0 0; 0 1 0; 0 0 1]
+s = one(z)
+@test s.array == [1 0 0; 0 1 0; 0 0 1]
 
 # Conversions
 

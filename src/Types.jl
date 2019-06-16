@@ -116,9 +116,17 @@ function zero(::Type{<:MultiValue{S,T,N,L}}) where {S,T,N,L}
   MultiValue{S,T,N,L}(z)
 end
 
+function zero(::MultiValue{S,T,N,L}) where {S,T,N,L}
+  zero(MultiValue{S,T,N,L})
+end
+
 function one(::Type{<:MultiValue{S,T,N,L}}) where {S,T,N,L}
   z = one(SArray{S,T,N,L})
   MultiValue{S,T,N,L}(z)
+end
+
+function one(::MultiValue{S,T,N,L}) where {S,T,N,L}
+  one(MultiValue{S,T,N,L})
 end
 
 # Conversions
