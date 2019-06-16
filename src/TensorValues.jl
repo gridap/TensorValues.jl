@@ -1,7 +1,7 @@
 module TensorValues
 
 using StaticArrays
-using Base: @propagate_inbounds
+using Base: @propagate_inbounds, @pure
 
 export MultiValue
 export TensorValue

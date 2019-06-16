@@ -142,6 +142,12 @@ function size(::Type{MultiValue{S,T,N,L}}) where {S,T,N,L}
   size(A)
 end
 
+function size(::Type{<:MultiValue{S}}) where S
+  _s(Size(S))
+end
+
+@pure _s(s::Size{T}) where T = T
+
 # Custom type printing
 
 function show(io::IO,v::MultiValue)

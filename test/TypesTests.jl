@@ -141,6 +141,7 @@ V = VectorValue{3,Int}
 
 V = VectorValue{3}
 @test length(V) == 3
+@test size(V) == (3,)
 
 # Custom type printing
 
