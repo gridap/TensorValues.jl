@@ -135,7 +135,7 @@ end
 
 # Misc operations on the type itself
 
-length(::Type{MultiValue{S,T,N,L}}) where {S,T,N,L} = L
+length(::Type{<: MultiValue{S,T,N,L} where {S,T,N}}  ) where L = L
 
 function size(::Type{MultiValue{S,T,N,L}}) where {S,T,N,L}
   A = SArray{S,T,N,L}
