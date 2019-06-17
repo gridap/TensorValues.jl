@@ -33,6 +33,30 @@ v = MultiValue{Tuple{3,2},Float64}(1,2,3,4,5,6)
 @test isa(v,MultiValue{Tuple{3,2},Float64})
 @test v.array == a
 
+a = SVector(1)
+v = MultiValue{Tuple{1}}((1,))
+@test isa(v,MultiValue{Tuple{1},Int})
+@test v.array == a
+
+v = MultiValue{Tuple{1}}(1)
+@test isa(v,MultiValue{Tuple{1},Int})
+@test v.array == a
+
+a = SMatrix{1,1}(1)
+v = MultiValue{Tuple{1,1}}(1)
+@test isa(v,MultiValue{Tuple{1,1},Int})
+@test v.array == a
+
+a = SVector{0,Int}()
+v = MultiValue{Tuple{0},Int}(())
+@test isa(v,MultiValue{Tuple{0},Int})
+@test v.array == a
+
+a = SMatrix{0,0,Int}()
+v = MultiValue{Tuple{0,0},Int}()
+@test isa(v,MultiValue{Tuple{0,0},Int})
+@test v.array == a
+
 # Constructors (TensorValue)
 
 a = SMatrix{2,2}(1,2,3,4)
@@ -69,7 +93,32 @@ t = TensorValue((1,2,3,4))
 @test isa(t,TensorValue{2,Int})
 @test t.array == [1 3;2 4]
 
+t = TensorValue{0,Int}()
+@test isa(t,TensorValue{0,Int})
+@test t.array == zeros(0,0)
+
+t = TensorValue{1}(10)
+@test isa(t,TensorValue{1,Int})
+@test t.array == 10*ones(1,1)
+
+t = TensorValue{1}((10,))
+@test isa(t,TensorValue{1,Int})
+@test t.array == 10*ones(1,1)
+
+t = TensorValue{1,Float64}(10)
+@test isa(t,TensorValue{1,Float64})
+@test t.array == 10*ones(1,1)
+
+t = TensorValue{1,Float64}((10,))
+@test isa(t,TensorValue{1,Float64})
+@test t.array == 10*ones(1,1)
+
 # Constructors (VectorValue)
+
+a = SVector(1)
+g = VectorValue(a)
+@test isa(g,VectorValue{1,Int})
+@test g.array == [1,]
 
 a = SVector(1,2,3,4)
 g = VectorValue(a)
@@ -84,6 +133,34 @@ g = VectorValue(a)
 g = VectorValue{4}((1,2,3,4))
 @test isa(g,VectorValue{4,Int})
 @test g.array == [1,2,3,4]
+
+g = VectorValue{1}((1,))
+@test isa(g,VectorValue{1,Int})
+@test g.array == [1,]
+
+g = VectorValue{0,Int}(())
+@test isa(g,VectorValue{0,Int})
+@test g.array == []
+
+g = VectorValue{4}(1,2,3,4)
+@test isa(g,VectorValue{4,Int})
+@test g.array == [1,2,3,4]
+
+g = VectorValue{1}(1)
+@test isa(g,VectorValue{1,Int})
+@test g.array == [1,]
+
+g = VectorValue{1,Float64}(1)
+@test isa(g,VectorValue{1,Float64})
+@test g.array == [1,]
+
+g = VectorValue{1,Float64}((1,))
+@test isa(g,VectorValue{1,Float64})
+@test g.array == [1,]
+
+g = VectorValue{0,Int}()
+@test isa(g,VectorValue{0,Int})
+@test g.array == []
 
 g = VectorValue{4,Float64}((1,2,3,4))
 @test isa(g,VectorValue{4,Float64})
@@ -104,6 +181,10 @@ g = VectorValue(1,2,3,4)
 g = VectorValue((1,2,3,4))
 @test isa(g,VectorValue{4,Int})
 @test g.array == [1,2,3,4]
+
+g = VectorValue(1)
+@test isa(g,VectorValue{1,Int})
+@test g.array == [1,]
 
 # Initializers
 
@@ -137,6 +218,10 @@ a = ones(Int,3)
 b = convert(VectorValue{3,Int},a)
 @test isa(b,VectorValue{3,Int})
 
+a = ones(Int,1)
+b = convert(VectorValue{1,Int},a)
+@test isa(b,VectorValue{1,Int})
+
 # Misc operations on the type itself
 
 V = VectorValue{3,Int}
@@ -149,6 +234,7 @@ V = VectorValue{3}
 
 # Custom type printing
 
+v = MultiValue{Tuple{3,2},Float64}(1,2,3,4,5,6)
 s = "TensorValues.MultiValue{Tuple{3,2},Float64,2,6}(1.0, 2.0, 3.0, 4.0, 5.0, 6.0)"
 @test string(v) == s
 

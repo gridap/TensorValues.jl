@@ -25,6 +25,19 @@ function (::Type{MultiValue{S}})(x::Tuple) where S<:Tuple
   MultiValue(array)
 end
 
+function (::Type{MultiValue{S}})(x::Tuple{}) where S<:Tuple
+  s = """
+  Unknown element type.
+
+  Provide element type in the corresponding type parameter.
+  Examples:
+  MultiValue{Tuple{0,0},Int}()
+  TensorValue{0,Int}()
+  VectorValue{0,Int}()
+  """
+  error(s)
+end
+
 function (::Type{MultiValue{S,T}})(x::Tuple) where {S<:Tuple,T}
   array = SArray{S,T}(x)
   MultiValue(array)
@@ -49,13 +62,18 @@ function (::Type{TensorValue{D}})(x::Tuple) where D
   MultiValue{S}(x)
 end
 
-function (::Type{TensorValue{D,T}})(x::Tuple) where {D,T}
-  S = Tuple{D,D}
-  MultiValue{S,T}(x)
+function (::Type{TensorValue{0}})()
+  S = Tuple{0,0}
+  MultiValue{S}()
 end
 
 function (::Type{TensorValue{D}})(x::Vararg) where D
   TensorValue{D}(x)
+end
+
+function (::Type{TensorValue{D,T}})(x::Tuple) where {D,T}
+  S = Tuple{D,D}
+  MultiValue{S,T}(x)
 end
 
 function (::Type{TensorValue{D,T}})(x::Vararg) where {D,T}
@@ -73,6 +91,11 @@ function TensorValue(args::Vararg)
   TensorValue(args)
 end
 
+function TensorValue()
+  S = Tuple{0,0}
+  MultiValue{S}()
+end
+
 function TensorValue(a::StaticArray)
   TensorValue(a.data)
 end
@@ -84,30 +107,45 @@ function (::Type{VectorValue{D}})(x::Tuple) where D
   MultiValue{S}(x)
 end
 
-function (::Type{VectorValue{D,T}})(x::Tuple) where {D,T}
-  S = Tuple{D}
-  MultiValue{S,T}(x)
-end
-
-function (::Type{VectorValue{D}})(x::Vararg{Any,D}) where D
+function (::Type{VectorValue{D}})(x::Vararg) where D
   VectorValue{D}(x)
 end
 
-function (::Type{VectorValue{D,T}})(x::Vararg{Any,D}) where {D,T}
-  VectorValue{D,T}(x)
+function (::Type{VectorValue{D,T}})() where {D,T}
+  S = Tuple{D}
+  MultiValue{S,T}()
 end
 
 function VectorValue(arg::NTuple{D,T}) where {D,T}
   VectorValue{D,T}(arg)
 end
 
+function (::Type{VectorValue{D,T}})(x::Vararg{Number,D}) where {T,D}
+  VectorValue{D,T}(x)
+end
+
 function VectorValue(args::Vararg)
   VectorValue(args)
+end
+
+function VectorValue()
+  S = Tuple{0}
+  MultiValue{S}()
 end
 
 function VectorValue(a::StaticArray)
   VectorValue(a.data)
 end
+
+function VectorValue(a::SVector)
+  MultiValue(a)
+end
+
+function VectorValue(a::MVector)
+  MultiValue(a)
+end
+
+
 
 # Initializers
 
