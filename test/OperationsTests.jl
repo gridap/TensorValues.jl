@@ -191,4 +191,9 @@ r = VectorValue(-1,1,-3)
 R = fill(r,(4,5))
 @test C == R
 
+# conj
+
+v = VectorValue(1,0)
+@test v == v'
+
 end # module OperationsTests

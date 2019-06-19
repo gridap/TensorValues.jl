@@ -105,3 +105,7 @@ meas(a::VectorValue) = sqrt(inner(a,a))
 
 meas(a::TensorValue) = abs(det(a))
 
+# conj
+
+conj(a::MultiValue) = MultiValue(conj(a.array))
+
