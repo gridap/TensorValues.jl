@@ -1,7 +1,7 @@
 name = "TensorValues"
 uuid = "31c64edf-cdeb-50e4-845d-ed2334360c20"
 authors = ["Francesc Verdugo <fverdugo@cimne.upc.edu>"]
-version = "0.3.2"
+version = "0.3.3"
 
 [deps]
 LinearAlgebra = "37e2e46d-f89d-539d-b4ee-838fcccc9c8e"
