@@ -235,7 +235,7 @@ V = VectorValue{3}
 # Custom type printing
 
 v = MultiValue{Tuple{3,2},Float64}(1,2,3,4,5,6)
-s = "TensorValues.MultiValue{Tuple{3,2},Float64,2,6}(1.0, 2.0, 3.0, 4.0, 5.0, 6.0)"
+s = "(1.0, 2.0, 3.0, 4.0, 5.0, 6.0)"
 @test string(v) == s
 
 end # module TypesTests

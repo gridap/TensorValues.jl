@@ -197,6 +197,10 @@ end
 # Custom type printing
 
 function show(io::IO,v::MultiValue)
+  print(io,v.array.data)
+end
+
+function show(io::IO,::MIME"text/plain",v::MultiValue)
   print(io,typeof(v))
   print(io,v.array.data)
 end
