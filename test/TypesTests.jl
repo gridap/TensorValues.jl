@@ -222,6 +222,13 @@ a = ones(Int,1)
 b = convert(VectorValue{1,Int},a)
 @test isa(b,VectorValue{1,Int})
 
+a = (1,2,2,1,3,2)
+V = MultiValue{Tuple{3,2},Int,2,6}
+b = convert(V,a)
+@test isa(b,V)
+b = V[a,a,a,]
+@test isa(b,Vector{V})
+
 # Misc operations on the type itself
 
 V = VectorValue{3,Int}
