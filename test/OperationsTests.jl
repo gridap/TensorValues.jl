@@ -195,6 +195,7 @@ R = fill(r,(4,5))
 
 v = VectorValue(1,0)
 @test v == v'
+@test conj(v) == v'
 
 t = TensorValue(1,2,3,4)
 @test trace(t) == 5
@@ -208,6 +209,7 @@ t = TensorValue(1,2,3,4,5,6,7,8,9)
 
 a = TensorValue(1,2,3,4)
 b = a'
+@test adjoint(a) == b
 @test b == TensorValue(1,3,2,4)
 @test a*b == TensorValue(10,14,14,20)
 
