@@ -63,6 +63,8 @@ function (*)(a::MultiValue,b::MultiValue)
   MultiValue(r)
 end
 
+@inline dot(u::VectorValue,v::VectorValue) = inner(u,v)
+
 # Inner product (full contraction)
 
 inner(a::Real,b::Real) = a*b
@@ -105,7 +107,38 @@ meas(a::VectorValue) = sqrt(inner(a,a))
 
 meas(a::TensorValue) = abs(det(a))
 
+@inline norm(u::VectorValue) = sqrt(inner(u,u))
+
 # conj
 
 conj(a::MultiValue) = MultiValue(conj(a.array))
+
+# Trace
+
+@generated function trace(v::TensorValue{D}) where D
+  str = join([" v.array.data[$i+$((i-1)*D)] +" for i in 1:D ])
+  Meta.parse(str[1:(end-1)])
+end
+
+@inline tr(v::TensorValue) = trace(v)
+
+# Adjoint
+
+function adjoint(v::TensorValue)
+  t = adjoint(v.array)
+  TensorValue(t)
+end
+
+# Symmetric part
+
+@generated function symmetic_part(v::TensorValue{D}) where D
+  str = "("
+  for j in 1:D
+    for i in 1:D
+      str *= "0.5*v.array.data[$i+$((j-1)*D)] + 0.5*v.array.data[$j+$((i-1)*D)], "
+    end
+  end
+  str *= ")"
+  Meta.parse("TensorValue($str)")
+end
 

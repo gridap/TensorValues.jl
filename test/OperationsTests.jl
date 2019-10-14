@@ -196,4 +196,24 @@ R = fill(r,(4,5))
 v = VectorValue(1,0)
 @test v == v'
 
+t = TensorValue(1,2,3,4)
+@test trace(t) == 5
+@test tr(t) == 5
+
+t = TensorValue(1,2,3,4,5,6,7,8,9)
+@test trace(t) == 15
+@test tr(t) == 15
+
+@test symmetic_part(t) == TensorValue(1.0, 3.0, 5.0, 3.0, 5.0, 7.0, 5.0, 7.0, 9.0)
+
+a = TensorValue(1,2,3,4)
+b = a'
+@test b == TensorValue(1,3,2,4)
+@test a*b == TensorValue(10,14,14,20)
+
+u = VectorValue(1.0,2.0)
+v = VectorValue(2.0,3.0)
+@test dot(u,v) ≈ inner(u,v)
+@test norm(u) ≈ sqrt(inner(u,u))
+
 end # module OperationsTests
