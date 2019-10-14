@@ -245,4 +245,12 @@ v = MultiValue{Tuple{3,2},Float64}(1,2,3,4,5,6)
 s = "(1.0, 2.0, 3.0, 4.0, 5.0, 6.0)"
 @test string(v) == s
 
+# Misc
+
+M = mutable(VectorValue{3,Int})
+@test M == MVector{3,Int}
+m = zero(M)
+v = VectorValue(m)
+@test isa(v,VectorValue{3,Int})
+
 end # module TypesTests

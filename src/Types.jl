@@ -209,3 +209,7 @@ function show(io::IO,::MIME"text/plain",v::MultiValue)
   print(io,v.array.data)
 end
 
+# Misc
+
+mutable(::Type{MultiValue{S,T,N,L}}) where {S,T,N,L} = MArray{S,T,N,L}
+

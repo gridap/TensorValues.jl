@@ -9,6 +9,7 @@ export VectorValue
 
 export inner, outer, meas
 export det, inv
+export mutable
 
 import Base: show
 import Base: zero, one
